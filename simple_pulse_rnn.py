@@ -4,12 +4,40 @@ import sys
 import copy
 import numpy as np
 import matplotlib.pyplot as plt
-from impulse_data import *
+
+class ImpulseData(object):
+    """
+    x - network inputs
+    y - desired output
+    """
+    def __init__(self, data_len):
+        self.x = np.zeros((data_len, 2), np.float32)
+        self.y = np.zeros((data_len, 1), np.float32)
+        period = 11
+        i = 0
+        while i < data_len:
+            a = np.random.randint(2)
+            self.x[i, 0] = a
+            if a == 1:
+                b = np.random.rand()
+                self.x[i, 1] = b
+                pulse_len = int(b * 10)
+                if i + pulse_len < data_len:
+                    self.y[i:i + pulse_len, 0] = 1
+                else:
+                    self.y[i:-1, 0] = 1
+                i += period
+            i += 1
 
 train_data_len = 200000
-X, y = gen_data(train_data_len)
+train_data = ImpulseData(train_data_len)
+X = train_data.x
+y = train_data.y
+
 valid_data_len = 200
-Xv, yv = gen_data(valid_data_len)
+valid_data = ImpulseData(valid_data_len)
+Xv = valid_data.x
+yv = valid_data.y
 
 def activation(x):
     output = 1/(1 + np.exp(-x))

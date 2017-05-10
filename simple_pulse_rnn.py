@@ -5,7 +5,7 @@ import copy
 import numpy as np
 import matplotlib.pyplot as plt
 
-class ImpulseData(object):
+class ImpulseData(object): #TODO remove object
     """
     x - network inputs
     y - desired output

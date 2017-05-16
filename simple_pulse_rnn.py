@@ -115,7 +115,7 @@ for j in range(valid_data_len):
     np.copyto(h_prev, h)
     actual_out[j, 0] = y_1[0, 0]
 
-plt.plot(yv[:, 0])
-plt.plot(actual_out[:, 0], 'r')
-plt.show()
+#plt.plot(yv[:, 0])
+#plt.plot(actual_out[:, 0], 'r')
+#plt.show()
 
